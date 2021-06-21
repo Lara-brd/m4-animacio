@@ -1,0 +1,158 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing: border-box;
+}
+
+body{
+    font-family: 'Lato', sans-serif;
+}
+
+
+/*Biblioteca de colores para aplicarlos a los divs con clases*/
+.blue { background-color: #244f75;}
+.aquamarine { background-color: #60bfbf;}
+.purple { background-color: #8C4B7E;}
+.yellow { background-color: #F8BB44;}
+.coral { background-color: #F24B4B;}
+
+
+/*Propiedad display block al h1 para disponer de todo el ancho del div, de lo contrario el texto tendrá dificultad para crecer según vw*/
+h1 {
+    display: block;
+    width: 100%;
+    text-align: center;
+    color:white;
+    font-weight: 300;
+    font-size: 3.5vw;
+    text-transform: uppercase;
+}
+
+
+/*Utilizo grid para colocar los elementos en columnas*/
+main {
+    height: 100vh;
+    display: grid;
+    grid-gap: 5px;
+    grid-template-columns: repeat(5, 1fr);
+    padding: 8px 0;
+    overflow: hidden;
+}
+
+
+/*Para centrar los elementos del interior de los items utilizo flex*/
+main > * {
+    background-color: goldenrod;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+
+}
+
+
+/*Creo un before con content vacio para darle las propiedades a la linea transparente sobre el div*/
+.item:before {
+    content: '';
+    height: 100%;
+    width: 100%;
+    background-color: white;
+    position:absolute;
+    top:0;
+    left:0;
+    opacity: 0.05;
+    /*Inclino la linea*/
+    transform: skew(30deg);
+    /*Creo una transición para que al quitar el cursor de la zona también haya animación*/
+    transition: all 200ms ease-in;
+
+}
+
+.item:hover::before{
+    transform: skew(0deg) scaleX(2);
+}
+
+
+
+/*ANIMACIONES ENTRADA*/
+
+
+/* 1 from left */
+
+.content:nth-child(1){
+    /*Duration -> easy-out no acaba lo suficientemente lento así que le asigno easy-out exponencial, */
+    transform: translate3d(-20vw, 0, 0);
+    animation: left 800ms cubic-bezier(.19,1,.22,1) forwards;
+}
+
+@keyframes left {
+    from{ transform: translate3d(-20vw, 0, 0);}
+    to{transform: translateX(0px);}
+}
+
+
+/* 2 from bottom */
+
+.content:nth-child(2){
+    transform: translate3d(100vw,0,0);
+    animation: bottom 1s cubic-bezier(.19,1,.22,1) forwards;
+    
+}
+
+@keyframes bottom {
+    from{ transform: translate3d(0, 100vw, 0);}
+    to{transform: translate3d(0, 0 ,0);}
+}
+
+
+/* 3 from top */
+
+.content:nth-child(3){
+    transform: translate3d(0, -100vw, 0);
+    animation: top 1s cubic-bezier(.19,1,.22,1) forwards;
+    
+}
+
+@keyframes top {
+    from{ transform: translate3d(0, -100vw, 0);}
+    to{transform: translate3d(0, 0, 0);}
+}
+
+
+/* 4 from bottom */
+
+.content:nth-child(4){
+    transform: translate3d(0, -100vw, 0);
+    /*Vuelvo a utilizar la animación bottom pero con 200ms de retraso*/
+    animation: bottom 1s cubic-bezier(.19,1,.22,1) 200ms forwards;
+    
+}
+
+
+/* 4 from right */
+
+.content:nth-child(5){
+    /* repito la animación left pero con translate en positivo*/
+    transform: translate3d(20vw, 0, 0);
+    animation: right 800ms cubic-bezier(.19,1,.22,1) 500ms forwards;
+}
+
+@keyframes right {
+    from{ transform: translate3d(20vw, 0, 0);}
+    to{transform: translate3d(0, 0, 0);}
+}
+
+
+
+
+
+
+
+
+
+
+
+
